@@ -25,11 +25,11 @@
         <allow-intent href="itms-apps:*" />
     </platform>
 	<preference name="AndroidLaunchMode" value="singleTask" />
-    <plugin name="cordova-plugin-firebase" spec="^1.0.0" />
-    <plugin name="cordova-plugin-buildinfo" spec="^2.0.1" />
-    <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
-    <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="cordova-plugin-firebase" />
+    <plugin name="cordova-plugin-buildinfo"/>
+    <plugin name="cordova-universal-links-plugin" />
+    <plugin name="cordova-plugin-browsertab"/>
+    <plugin name="cordova-plugin-inappbrowser" />
 	<universal-links>
     <host name="https://yn232.app.goo.gl" scheme="https" />
     <host name="letmeet-bai.firebaseapp.com" scheme="https">
