@@ -26,7 +26,7 @@
     </platform>
 	<preference name="AndroidLaunchMode" value="singleTask" />
     <plugin name="cordova-plugin-inappbrowser" />
-	<plugin name="com.phonegap.plugins.facebookconnect">
+<plugin name="cordova-plugin-firebase" spec="1.0.0" />
 	<universal-links>
     <host name="https://yn232.app.goo.gl" scheme="https" />
     <host name="letmeet-bai.firebaseapp.com" scheme="https">
