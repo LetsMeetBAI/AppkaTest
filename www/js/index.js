@@ -117,6 +117,9 @@ function showeventpage(){
 	showevents1();
 	}
 }
+functionDoindex2(){
+	window.location.replace('index2.html');
+}
 function toindexpage(){
 	window.location.replace('index.html');
 }
@@ -206,7 +209,7 @@ function Googlelogintest() {
 function Googlelogintest2() {
     window.plugins.googleplus.login(
         {
-            'webClientId': '688044304067-one0hdvtpl7th74r38b3puqh9atv65v7.apps.googleusercontent.com',
+            'webClientId': '688044304067-nr5vg19lvsqbthnncvvrkc3pqlkbb0o4.apps.googleusercontent.com',
             'offline': true
         },
         function (obj) {
