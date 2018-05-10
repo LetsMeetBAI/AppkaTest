@@ -147,52 +147,27 @@ function register(){
     statusChangeCallback(response);
   });
 }
-function facelogintest(){
-	FB.init({
-    appId      : '1583806705075141',
-    cookie     : true,
-    xfbml      : true,
-    version    : 'v2.6'
-    });     
-	
-	FB.Event.subscribe('auth.authResponseChange', checkLoginState);
-	function checkLoginState(event) {
-	if (event.authResponse) {
-    // User is signed-in Facebook.
-    var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
-      unsubscribe();
-      // Check if we are already signed-in Firebase with the correct user.
-      if (!isUserEqual(event.authResponse, firebaseUser)) {
-        // Build Firebase credential with the Facebook auth token.
-        var credential = firebase.auth.FacebookAuthProvider.credential(event.authResponse.accessToken);
-        // Sign in with the credential from the Facebook user.
-        firebase.auth().signInWithCredential(credential).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          // ...
-		  console.log("heh");
-        });
-      } else {
-        // User is already signed-in Firebase with the correct user.
-      }
+
+function Googlelogin() {
+    firebase.auth().onAuthStateChanged( function(user){
+        if(user) {
+            login(user);
+        } else {
+            var provider = new  firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
+        }
     });
-  } else {
-    // User is signed-out of Facebook.
-    firebase.auth().signOut();
-  }
 }
-}
-function facelogintest(){
 
-
-
-
-
+function Facebooklogin() {
+    firebase.auth().onAuthStateChanged( function(user){
+        if(user) {
+            login(user);
+        } else {
+            var provider = new  firebase.auth.FacebookAuthProvider();
+            firebase.auth().signInWithRedirect(provider);
+        }
+    });
 }
 
 function Googlelogintest() {
@@ -229,99 +204,9 @@ firebase.auth().getRedirectResult().then(function(result) {
   var errorCode = error.code;
   var errorMessage = error.message;
 });
-	}
-function Googlelogintest2() {
-    window.plugins.googleplus.login(
-        {
-            'webClientId': '688044304067-nr5vg19lvsqbthnncvvrkc3pqlkbb0o4.apps.googleusercontent.com',
-            'offline': true
-        },
-        function (obj) {
-
-            console.log(obj);
-            if (!firebase.auth().currentUser) {
-                console.log(obj.idToken);
-                firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(obj.idToken))
-                    .then((success) => {
-                    console.log("success: " + JSON.stringify(success));
-                login(obj)
-            })
-            .catch((error) => {
-                    console.log("error0: " + JSON.stringify(error));
-            });
-            } else {
-                console.log('error1: already sigend in firebase');
-            }
-        },
-        function (msg) {
-            console.log("error2: " + msg);
-        }
-    );
 }
 
 
-function facelogin(){
-	var provider = new firebase.auth.FacebookAuthProvider();
-	firebase.auth().signInWithPopup(provider).then(function(result) {
-  var token = result.credential.accessToken;
-
-  var user = result.user;
-
-}).catch(function(error) {
-
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  var email = error.email;
-  var credential = error.credential;
-});
-}
-function googlogin(){
-  var provider = new firebase.auth.GoogleAuthProvider();
-  provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-
-
-   firebase.auth().signInWithRedirect(provider);
-	firebase.auth().getRedirectResult().then(function(result)  {
-        if (result.credential) {
-          var token = result.credential.accessToken;
-          document.getElementById('quickstart-oauthtoken').textContent = token;
-        } else {
-          document.getElementById('quickstart-oauthtoken').textContent = 'null';
-        }
-        var user = result.user;
-      }).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-         var email = error.email;
-        var credential = error.credential;
-        if (errorCode === 'auth/account-exists-with-different-credential') {
-          alert('You have already signed up with a different auth provider for that email.');
-          // If you are using multiple auth providers on your app you should handle linking
-          // the user's accounts here.
-        } else {
-          console.error(error);
-        }
-      });
-}
-window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1583806705075141',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{latest-api-version}'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
 function logout(){
   firebase.auth().signOut();
 }
