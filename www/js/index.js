@@ -184,6 +184,55 @@ function facelogintest(){
   }
 }
 }
+function facelogintest(){
+
+
+
+
+
+}
+
+function Googlelogintest() {
+	    console.log('google');
+	    firebase.auth().onAuthStateChanged( function(user){
+	        if(user) {
+	            login(user);
+	        } else {
+	            var provider = new  firebase.auth.GoogleAuthProvider();
+	            firebase.auth().signInWithRedirect(provider);
+	        }
+	    });
+	}
+function Googlelogintest2() {
+    window.plugins.googleplus.login(
+        {
+            'webClientId': '688044304067-one0hdvtpl7th74r38b3puqh9atv65v7.apps.googleusercontent.com',
+            'offline': true
+        },
+        function (obj) {
+
+            console.log(obj);
+            if (!firebase.auth().currentUser) {
+                console.log(obj.idToken);
+                firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(obj.idToken))
+                    .then((success) => {
+                    console.log("success: " + JSON.stringify(success));
+                login(obj)
+            })
+            .catch((error) => {
+                    console.log("error0: " + JSON.stringify(error));
+            });
+            } else {
+                console.log('error1: already sigend in firebase');
+            }
+        },
+        function (msg) {
+            console.log("error2: " + msg);
+        }
+    );
+}
+
+
 function facelogin(){
 	var provider = new firebase.auth.FacebookAuthProvider();
 	firebase.auth().signInWithPopup(provider).then(function(result) {
