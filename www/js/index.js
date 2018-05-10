@@ -117,7 +117,7 @@ function showeventpage(){
 	showevents1();
 	}
 }
-functionDoindex2(){
+function Doindex2(){
 	window.location.replace('index2.html');
 }
 function toindexpage(){
